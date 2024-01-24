@@ -1,2 +1,2 @@
-# baxmx-website
+# Bax Website Pages
 Pages for Bax.mx
