@@ -1,0 +1,74 @@
+<script src="https://unpkg.com/ezmdpage@2"></script><plaintext />
+
+<style>
+html .markdown-body {
+  background-color: black;
+  color: white;
+}
+
+.logo {
+	width: 200px;
+}
+</style>
+
+
+
+# Ejercicio DevOps Bax
+
+En el equipo de DevOps Bax hacemos un uso extensivo de tecnologías AWS y Terraform. Por lo mismo necesitamos asegurarnos que tus conocimientos y habilidades en dichas tecnologías  se apegan a lo que estamos buscando.
+
+Para esto te pedimos resolver el siguiente ejercicio.
+
+
+## Instrucciones generales
+
+Para este ejercicio, vas a desarrollar una infraestructura AWS utilizando Terraform. El proyecto debe consistir de una colección de archivos .tf  .  El entregable del ejercicio será un archivo .zip con los archivos del proyecto.  
+
+No hay tiempo límite para implementar el ejercicio. Una vez que tengas esta liga, puedes utilizar el tiempo necesario para implementarlo. Ya que lo termines, envíanos un correo con tu solución adjunta.
+
+
+## Infraestructura AWS en Terraform
+
+Necesitamos implementar la siguiente infraestructura en AWS
+
+
+
+* 1 VPC:  Un VPC de Amazon con un  CIDR: 10.3.0.0/18
+* 3 Subnets:  Dentro de la VPC del punto anterior, establecer 3 subnets con CIDRs: 10.3.5.0/24  , 10.3.7.0/24  y 10.3.9.0/24
+* 1 Internet Gateway: Disponible para las 3 subnets (configurar las tablas de rueto necesarias para que las 3 subnets tengan acceso a internet)
+* 2 instancias de EC2 con  Amazon Linux 2023: Poner cada instancia debe estar en una de las 3 subredes diferentes.
+    * Primera Instancia (Todo esto debe configurarse de manera automática a través de terraform cuando se crea la instancia):
+        * Instalar el servidor de BDD de PostgreSQL (de la manera que quieras).
+        * El script de inicialización de la instancia debe jalar el USER y PASSWORD del usuario de base de datos desde AWS Secrets manager.  
+        * Únicamente el puerto 5432 (postgres default) INBOUND debe estar abierto.
+        * Crear una base de datos llamada baxtest
+        * Crear 2 tablas  (con 3 columnas columnas cada una)
+        * Crear un usuario adicional read-only que pueda ver la info de las 2 tablas  (todo esto solo cuando se crea el EC2 la primera vez)
+    * Segunda instancia
+        * Instalar  un servidor vanilla de Nginx, en puerto 80
+        * Abrir puertos 80 y 22 INBOUND al mundo (0.0.0.0/0). Todos los demás puertos deben estar bloqueados, INBOUND . (outbound abierto 443 y 80)
+        * El servidor Nginx debe mostrar la página por defecto de Nginx (no es necesario más configuración)
+* 1 Servicio en ECS: Deployar el servicio https://github.com/PrivateBin   en un cluster ECS, en 1 servicio que tenga una sola tarea.
+
+La infraestructura se debe poder levantar utilizando los siguientes comandos:
+
+terraform init \
+terraform apply
+
+Por lo que la configuración del proveedor AWS debe ser establecida en en algún archivo de terraform.
+
+
+## Entregable
+
+Al finalizar el ejercicio, crea un archivo .zip con la carpeta con todos los archivos .tf que hayas implementado y envíala al correo de [reclutamiento@bax.mx](mailto:reclutamiento@bax.mx) con el título del correo:  RESPUESTA EJERCICIO DEVOPS
+
+
+## Siguientes Pasos
+
+Una vez que nos envíes tu respuesta, te responderemos para confirmar la recepción. A continuación la vamos a revisar y te comentaremos siguientes pasos.  
+
+
+## Preguntas y Ayuda
+
+Cualquier duda del ejercicio mándanos un correo electrónico. 
+
